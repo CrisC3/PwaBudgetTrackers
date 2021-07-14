@@ -32,12 +32,14 @@ function populateTable() {
     // create and populate a table row
     let tr = document.createElement("tr");
     let dateConvert = new Date(transaction.date);
+    let isFunds = (transaction.value > 0) ? true : false;
     let currValue = new Intl.NumberFormat("en-US", {style: 'currency', currency: 'USD'}).format(transaction.value);
     let transDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(dateConvert);
+   
     tr.innerHTML = `
       <td>${transDate}</td>
       <td>${transaction.name}</td>
-      <td>${currValue}</td>
+      <td style="${(isFunds) ? "color: green;" : "color: red;"} font-weight: bold;">${(isFunds) ? currValue : "(" + currValue + ")"}</td>
     `;
 
     tbody.appendChild(tr);
