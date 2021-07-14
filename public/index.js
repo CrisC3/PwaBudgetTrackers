@@ -31,9 +31,13 @@ function populateTable() {
   transactions.forEach(transaction => {
     // create and populate a table row
     let tr = document.createElement("tr");
+    let dateConvert = new Date(transaction.date);
+    let currValue = new Intl.NumberFormat("en-US", {style: 'currency', currency: 'USD'}).format(transaction.value);
+    let transDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(dateConvert);
     tr.innerHTML = `
+      <td>${transDate}</td>
       <td>${transaction.name}</td>
-      <td>${transaction.value}</td>
+      <td>${currValue}</td>
     `;
 
     tbody.appendChild(tr);
