@@ -28,13 +28,14 @@ app.use(express.static("public"));
 
 mongoose.connect(mongoDbConnStr, {
   useNewUrlParser: true,
-  useFindAndModify: false
+  useFindAndModify: false,
+  useUnifiedTopology: true
 });
 
 // routes
 app.use(require("./routes/api.js"));
 
 app.listen(PORT, () => {
-  console.log("Connected using " + mongoDbConnStr);
+  console.log("Connected to = " + mongoDbConnStr);
   console.log(`App running on port ${PORT}!`);
 });
