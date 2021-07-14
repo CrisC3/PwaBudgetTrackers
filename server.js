@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const compression = require("compression");
 
 const PORT = 3000;
+const mongoDbConnStr = process.env.MONGODB_URI || "mongodb://localhost:27017/budget";
 
 const app = express();
 
@@ -15,7 +16,14 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost/budget", {
+//#region Original code
+// mongoose.connect("mongodb://localhost/budget", {
+//   useNewUrlParser: true,
+//   useFindAndModify: false
+// });
+//#endregion
+
+mongoose.connect(mongoDbConnStr, {
   useNewUrlParser: true,
   useFindAndModify: false
 });
