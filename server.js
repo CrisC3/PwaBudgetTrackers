@@ -1,10 +1,13 @@
+//dotenv required for .env file
+require("dotenv").config();
+
 const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 const compression = require("compression");
 
 const PORT = 3000;
-const mongoDbConnStr = process.env.MONGODB_URI || "mongodb://localhost:27017/budget";
+const mongoDbConnStr = process.env.MONGODB_URI || "mongodb://localhost/budget";
 
 const app = express();
 
@@ -32,5 +35,6 @@ mongoose.connect(mongoDbConnStr, {
 app.use(require("./routes/api.js"));
 
 app.listen(PORT, () => {
+  console.log("Connected using " + mongoDbConnStr);
   console.log(`App running on port ${PORT}!`);
 });
