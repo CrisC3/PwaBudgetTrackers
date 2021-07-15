@@ -39,7 +39,7 @@ function populateTable() {
     tr.innerHTML = `
       <td>${transDate}</td>
       <td>${transaction.name}</td>
-      <td style="${(isFunds) ? 'color: green;' : 'color: red;'} font-weight: bold;">${(isFunds) ? currValue : "(" + currValue + ")"}</td>
+      <td style="${(isFunds) ? 'background-color:green;' : 'background-color:red;'} color:white; font-weight:bold;">${(isFunds) ? currValue : "(" + currValue + ")"}</td>
     `;
 
     tbody.appendChild(tr);
