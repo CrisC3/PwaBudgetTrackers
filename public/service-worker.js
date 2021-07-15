@@ -48,3 +48,42 @@ self.addEventListener("activate", (event) => {
     
     self.clients.claim();
 });
+
+self.addEventListener("fetch", (event) => {
+
+    // Checks if the request URL contains the string "/api/"
+    if (event.request.url.includes("/api/")) {
+
+        event.respondWith(
+            caches.open(dataCacheName)
+            .then(cache => {
+                
+                return fetch(event.request)
+                .then(response => {
+                    
+                    if (response.status === 200) {
+                        cache.put(event.request.url, response.clone());
+                    }
+
+                    return response;
+                })
+                .catch(error => {
+                    return cache.match(event.request);
+                });
+            })
+            .catch(error => console.log(error))
+        );
+
+        return;
+    }
+
+    event.respondWith(
+        caches.open(staticCacheName)
+        .then(cache => {
+            return cache.match(event.request)
+            .then(response => {
+                return response || fetch(event.request);
+            });
+        })
+    );
+});
