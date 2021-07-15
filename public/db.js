@@ -26,7 +26,7 @@ function saveToDb() {
     const getAll = store.getAll();
 
     // If the request was successful
-    getAll.onsuccess = function () {
+    getAll.onsuccess = () => {
         
         // If there are items in the store, we need to bulk add them when we are back online
         if (getAll.result.length > 0) {
