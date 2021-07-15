@@ -57,3 +57,30 @@ function saveToDb() {
         }
     };
 }
+
+request.onsuccess = (event) => {
+    console.log("success");
+    db = event.target.result;
+  
+    // Check if app is online before reading from db
+    if (navigator.onLine) {
+      console.log("Backend online! 🗄️");
+      saveToDb();
+    }
+  };
+  
+  const saveRecord = (record) => {
+    console.log("Save record invoked");
+    
+    // Create a transaction on the transactions db with readwrite access
+    const transaction = db.transaction(["transactions"], "readwrite");
+  
+    // Access your transactions object store
+    const store = transaction.objectStore("transactions");
+  
+    // Add record to your store with add method.
+    store.add(record);
+  };
+  
+  // Listen for app coming back online
+  window.addEventListener("online", saveToDb);
