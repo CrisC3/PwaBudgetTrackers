@@ -38,7 +38,6 @@ Run "npm start" or "node server.js" in the PowerShell/Bash.
 ## Links
 Live/Production = https://budgetrackersc3.herokuapp.com/  
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://budgetrackersc3.herokuapp.com/)  
-
 Repository = https://github.com/CrisC3/PwaBudgetTrackers  
 
 ## Questions
