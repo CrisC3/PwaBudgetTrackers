@@ -13,14 +13,26 @@ const cacheFiles =
 
 self.addEventListener("install", (event) => {
 
+    // Caches site static files
     event.waitUntil(
         caches.open(staticCacheName)
         .then((cache) => cache.addAll(cacheFiles))
     );
 
-    // Cache the transactions from MongoDB
+    // Cache the /api/transaction fetch from MongoDB
     event.waitUntil(
         caches.open(dataCacheName)
         .then((cache) => cache.add("/api/transaction"))
     );
+});
+
+self.addEventListener("activate", (event) => {
+    console.log("In 'Activate'");
+    console.log("****************************");
+    console.log(caches.keys());
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    event.waitUntil(
+        console.log(caches.keys())
+    );
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>")
 });
