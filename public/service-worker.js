@@ -19,6 +19,7 @@ self.addEventListener("install", (event) => {
     event.waitUntil(
         caches.open(staticCacheName)
         .then((cache) => cache.addAll(cacheFiles))
+        .then(self.skipWaiting())
     );
 
     // Cache the /api/transaction fetch from MongoDB
@@ -46,7 +47,7 @@ self.addEventListener("activate", (event) => {
             )
         })
     );
-    
+
     self.clients.claim();
 });
 
